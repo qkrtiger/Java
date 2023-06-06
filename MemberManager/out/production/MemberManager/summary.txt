@@ -1,0 +1,41 @@
+MVC 패턴을 활용한 JDBC 프로그램(프로젝트)
+
+0. 외부 라이브러리 포함
+  1) connector j (MySQL 드라이버 라이브러리)
+  2) lombok (setter/getter 자동 생성 라이브러리)
+
+1. 패키지 작성
+  0) com - 프로젝트 최상단 패키지
+           나머지 모든 패키지를 포함.
+  1) main - MainClass(main 메소드) : 프로그램 시작점.
+  2) controller - MemberController
+  3) service - MemberService
+  4) dao - MemberDao
+  5) view - MemberView
+  6) dto - MemberDto (+ InOutClass)
+
+2. 프로세스 설계
+  (controller) -> view -> controller -> service -> dao(DB)
+  dao -> service -> controller -> view
+  데이터의 보관 및 이동 : dto
+
+3. DTO 작성 : DB 테이블과 동일한 구조(컬럼->변수)로 작성.
+  lombok의 @Data는 toString, getter, setter를 자동 작성함.
+  toString을 재정의할 경우 @Data를 사용하면 메소드가 중첩되므로
+  @Getter, @Setter를 사용할 것.
+
+4. 검색은 아이디로.(결과는 하나의 데이터로)
+
+5. 수정, 삭제를 검색 하위 기능으로 처리.
+
+6. 메뉴
+1. 회원 정보 입력
+2. 회원 정보 출력(전체)
+3. 회원 정보 검색 > 내용 출력 후 > 수정/삭제 메뉴 출력
+0. 종료
+
+JDBC 프로그래밍 4단계
+1. 드라이버 로드(to DriverManager) - 1번만 실행 -> 생성자로 처리
+2. Connection(접속) 수립(처리)
+3. Statement로 쿼리문 실행 및 결과 처리
+4. 접속 등 해제
